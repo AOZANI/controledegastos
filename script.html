@@ -1,0 +1,22 @@
+<script>
+function salvar() {
+  const dados = {
+    descricao: document.getElementById('descricao').value,
+    valor: Number(document.getElementById('valor').value),
+    categoria: document.getElementById('categoria').value,
+    pagamento: 'PIX'
+  };
+
+  google.script.run.salvarGasto(dados);
+  alert('Salvo!');
+  atualizar();
+}
+
+function atualizar() {
+  google.script.run.withSuccessHandler(function(total) {
+    document.getElementById('total').innerText = 'R$ ' + total;
+  }).getTotalGastos();
+}
+
+window.onload = atualizar;
+</script>
